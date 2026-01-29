@@ -1,4 +1,5 @@
 # reproducibility
+<<<<<<< HEAD
 #calculations 
 2+2
 2-2
@@ -96,3 +97,8 @@ install.packages("purrr")
 # geting workiing directory
 getwd()
 
+=======
+
+this is my assignment. 
+wrie
+gagj
