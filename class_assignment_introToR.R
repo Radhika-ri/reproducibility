@@ -44,6 +44,8 @@ zdf[26,]
 zdf[180, "zsquared"]  
 
 
-# 5. read.csv(Tips.csv)
+# 5. 
+tips <- read.csv("TipsR.csv", na.strings = ".")
+
 
 
