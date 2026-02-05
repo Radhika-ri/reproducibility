@@ -23,29 +23,38 @@
 
 
 # 4. coding 
+#creating vector
 z<- 1:200
+#mean and standard deviation of z 
 mean(z)
 sd(z)
+#logical vector named zlog that is 'TRUE' for z values greater than 30
 zlog<- z>30
 zlog
-
+# dataframe zdf with z and zlog as columns
 zdf<- data.frame(z, zlog)
 zdf           
+#Changing the column names
 colnames(zdf) <- c("zvec", "zlogic")
 zdf
+#Making a new column
 zdf$zsquared <- z^2
+
 zdf$zsquared
+#Subseting the dataframe
 subset.data.frame(zdf, zsquared > 10 & zsquared < 100 )
 help("subset.data.frame")
 
 zdf[zdf$zsquared > 10 & zdf$zsquared < 100, ]
 
+# subset to only include the values on row 26
 zdf[26,]
+# subset column zsquared in the 180th row.
 zdf[180, "zsquared"]  
 
 
 # 5. 
 tips <- read.csv("TipsR.csv", na.strings = ".")
-
-
-
+str(tips)
+View(tips)
+#by using this code, we can check our data is read properly. 
