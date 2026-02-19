@@ -104,4 +104,52 @@ wrie
 gagj
 
 
-[link to my github flavored file](https://github.com/Radhika-ri/reproducibility/blob/main/coding_challenge_4.Rmd)
+[link to my github flavored file](https://github.com/Radhika-ri/reproducibility/blob/main/coding_challenge_4/cpding-challenge-4.md)
+
+## file tree ##
+
+```r
+fs::dir_tree()
+```
+```
+├── BacterialAlpha.csv
+├── Bull_richness.csv
+├── IMG_6821.HEIC
+├── MycotoxinData.csv
+├── README.md
+├── R_markdowntest.Rmd
+├── R_markdowntest.html
+├── R_markdowntest.md
+├── R_markdowntest_files
+│   └── figure-markdown_strict
+│       └── pressure-1.png
+├── TipsR.csv
+├── class coding challenge3_adv.R
+├── class_5feb.R
+├── class_assignment_introToR.R
+├── coding_challenge_4
+│   ├── coding_challenge_4.docx
+│   ├── coding_challenge_4.html
+│   ├── coding_challenge_4.log
+│   ├── cpding challenge 4.Rmd
+│   ├── cpding-challenge-4.docx
+│   ├── cpding-challenge-4.html
+│   └── cpding-challenge-4.md
+├── coding_challenge_4.Rmd
+├── coding_challenge_4.tex
+├── course.Rproj
+├── cpding-challenge-4_files
+│   └── figure-gfm
+│       ├── 15ADON-1.png
+│       ├── DON data-1.png
+│       ├── Seedmass-1.png
+│       └── arranging all-1.png
+├── diff_abund.csv
+├── intro to R.md
+├── plates.jpeg
+├── reflection.docx
+├── reproducibility.Rproj
+├── vis 2 homework.R
+├── vis1 code challenge2.R
+└── ~$ding_challenge_4.docx
+```
