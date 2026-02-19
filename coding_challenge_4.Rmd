@@ -2,11 +2,12 @@
 title: "coding challenge 4_markdown"
 author: "Radhika"
 output: 
+ 
+ word_document: 
  html_document:
   toc: TRUE
   number_sections: true
   toc_float: true
- word_document: 
   md_document:
     variant: gfm
    
@@ -18,7 +19,7 @@ date: "2026-02-19"
 
   a) YAML header: YAML contains the arguements like title, author, date demarcated by three dashes --- on both ends. this is displayed at the begining of the document. 
  
-  b) Literate programming : 
+  b) Literate programming : Literate programming is a method of writing code integrated with explanatory documentation in a single reproducible document.
  
 # . Question 
 
@@ -92,7 +93,7 @@ fig2
 ```
  
  
- 
+ [github repository link](https://github.com/Radhika-ri/reproducibility/tree/main)
  
  
 ```{r setup, include=FALSE}
