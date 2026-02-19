@@ -1,0 +1,69 @@
+---
+word_document: null
+author: "Radhika"
+date: "2026-02-19"
+output:
+  html_document:
+  toc: true 
+  number_sections: true
+  toc_float: true
+  md_document:
+    variant: 
+  pdf_document: 
+  word_document:
+pdf_document: 
+title: "R markdown test"
+---
+this is r code example
+```{r R code example, include=TRUE, echo=FALSE}
+#this is r code # WHAT I FIND IS FOR THE echo option to work as false, include needs to be true
+summary(mtcars)
+```
+
+this is example of adding figures
+```{r include figures}
+library(ggplot2)
+data("mtcars")
+ggplot(mtcars, aes(x= wt, y = mpg)) +
+  geom_point()
+
+```
+
+R MARKDOWN FORMATTING OPTIONS
+
+# first level header
+
+*this text is italics*
+
+spacing is important. otherwise it will not work!
+
+**this text is bold**
+
+creating lists
+
+1. one 
+2. two
+  - sub item
+
+## adding links
+
+[link to my github](https://github.com/Radhika-ri/reproducibility/blob/main/class%20coding%20challenge3_adv.R)
+
+
+
+
+
+### images
+
+![this is bacteria](plates.jpeg)
+
+#2 TABLES
+
+```{r adding tables}
+library(knitr)
+kable(mtcars, digits = 3, format = "markdown")
+```
+
+
+
+
