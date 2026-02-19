@@ -2,13 +2,11 @@
 title: "coding challenge 4_markdown"
 author: "Radhika"
 output: 
- word_document: 
-  
  html_document:
   toc: TRUE
   number_sections: true
   toc_float: true
-
+ word_document: 
   md_document:
     variant: gfm
    
