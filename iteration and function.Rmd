@@ -58,10 +58,11 @@ for (i in -30:100){
 f<- -30:100
 F_to_C(f)
 
-celcius.df <- NULL 
+celcius.df <- NULL []
 for (i in -30:100){   
 result_i <- data.frame(F_to_C(i), i)   
 celcius.df <- rbind.data.frame(celcius.df, result_i) 
 }
 ```
+[here is link to assignment in github](https://github.com/Radhika-ri/reproducibility/blob/main/iteration%20and%20function.Rmd)
 
