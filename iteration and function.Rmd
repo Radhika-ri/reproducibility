@@ -1,0 +1,67 @@
+---
+title: "iterations and functions"
+author: "Radhika"
+date: "2026-03-19"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+library(drc) 
+library(tidyverse)
+
+# function
+
+# if F= 32
+(5*(32 - 32)/9)
+
+F_to_C <- function(F_degree){
+  Celcious<- (5*(F_degree - 32)/9)
+  return(Celcious)
+}
+
+F_to_C(32)
+
+#sample.function <- function(... variable goes here ...){
+ # .... code goes here.... 
+#  return(... output ...)}
+
+#iterations
+
+#rep is used for repeating elements
+rep("b", 5) # repeats b, 5 times 
+rep(c("A", "B"), 5) # repeats A and B, 5 times 
+rep(c(1,2,5,2), times = 4, each = 4) # repeats 1 four times, 2 four times, 5 four times, and 2 four times. 
+
+#seq write the sequence 
+seq(from = 0, to = 10, by = 2) # sequence of numbers from 0 to 10  by 2s 
+seq(from = 1, to = 7) # sequence of numbers 1 to 7
+
+# combined seq() and rep()
+rep(seq(from = 0, to = 10, by = 2), times = 3, each = 2)
+
+#SEQ ALONG GIVES THE NUMBER SEQU OF THE LETTERS
+LETTERS
+seq_along(LETTERS[1:5]) # will return 1,2,3,4,5 not the actual letters.
+
+
+#LOOP
+for(r in 1:10){
+  print(r*5)
+}
+
+for (i in -30:100){
+ result <- F_to_C(i)
+ print(result)
+}
+
+f<- -30:100
+F_to_C(f)
+
+celcius.df <- NULL 
+for (i in -30:100){   
+result_i <- data.frame(F_to_C(i), i)   
+celcius.df <- rbind.data.frame(celcius.df, result_i) 
+}
+```
+
