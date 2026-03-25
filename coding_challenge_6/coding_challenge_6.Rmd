@@ -3,9 +3,9 @@ title: "coding_challenge_6"
 author: "Radhika"
 date: "2026-03-19"
 output: 
+  html_document:
   md_document: 
   variant: gfm
-  html_document:
 ---
 
 # 1.
@@ -92,3 +92,4 @@ dataframe
 
 ```
 
+[this is link to my github](https://github.com/Radhika-ri/reproducibility/tree/main/coding_challenge_6)
