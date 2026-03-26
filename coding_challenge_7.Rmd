@@ -1,0 +1,112 @@
+---
+title: "coding_challenge_7"
+author: "Radhika"
+date: "2026-03-26"
+output: 
+  html_document:
+  md_document: 
+  variannt: gfm 
+---
+##1.Read in the data called “PlantEmergence.csv” using a relative file path and load thefollowing libraries. tidyverse, lme4, emmeans, multcomp, and multcompView. Turn the Treatment , DaysAfterPlanting and Rep into factors using the function as.factor
+
+```{r 1. }
+
+plant<- read.csv("PlantEmergence.csv")
+library(tidyverse)
+library(lme4)
+library(emmeans)
+library(multcomp)
+library(multcompView)
+plant 
+
+plant$Treatment<- as.factor(plant$Treatment)
+str(plant$Treatment)
+
+plant$DaysAfterPlanting<- as.factor(plant$DaysAfterPlanting)
+
+plant$Rep<- as.factor(plant$Rep)
+str(plant)
+
+```
+
+##2. Fit a linear model to predict Emergence using Treatment and DaysAfterPlanting along with the interaction. Provide the summary of the linear model and ANOVA results.
+
+```{r 2.}
+
+model1<-lm(Emergence~Treatment*DaysAfterPlanting, data= plant)
+summary(lm(Emergence~Treatment*DaysAfterPlanting, data= plant))
+
+anova(lm(Emergence~Treatment*DaysAfterPlanting, data= plant))
+
+
+```
+
+##3. Based on the results of the linear model in question 2, do you need to fit the interaction term? Provide a simplified linear model without the interaction term but still testing both main effects. Provide the summary and ANOVA results. Then, interpret the intercept and the coefficient for Treatment 2.
+
+The interaction is not signifcant strategically. so we don't need to include that in our model. 
+
+
+```{r 3. }
+
+model2<-lm(Emergence~Treatment+DaysAfterPlanting, data= plant)
+summary(lm(Emergence~Treatment+DaysAfterPlanting, data= plant))
+
+anova(model2)
+
+```
+the intercept for model2 is   182.163 and coefficient for treatment 2 is  -134.531. it is negative showing negative relationship between the two variables. treatment2 has a significant effect on the dependent variable. 
+
+##4. Calculate the least square means for Treatment using the emmeans package and perform a Tukey separation with the compact letter display using the cld function. Interpret the results.
+
+```{r 4. }
+lsmeans<- emmeans(model2, ~Treatment )
+Results_lsmeans <- cld(lsmeans)
+
+Results_lsmeans 
+```
+Treatment 2 has the lowest mean and treatment 7 has the intermediate mean while treatment 6 has highest mean. there are different groups, groups with common number are not significant different from each other. so treatment 2 is significant diffrent from all other treatment groups. treatment 7 is different from all except 1, 9, 4, 8. 6, 3, 5 treatment are significantly different from 2 and 7. 
+
+
+##5. he provided function lets you dynamically add a linear model plus one factor from that model and plots a bar chart with letters denoting treatment differences. Use this model to generate the plot shown below. Explain the significance of the letters.
+
+```{r 5. }
+plot_cldbars_onefactor <- function(lm_model, factor) {
+data <- lm_model$model
+variables <- colnames(lm_model$model)
+dependent_var <- variables[1]
+independent_var <- variables[2:length(variables)]
+lsmeans <- emmeans(lm_model, as.formula(paste("~", factor))) # estimate
+lsmeans
+Results_lsmeans <- cld(lsmeans, alpha = 0.05, reversed = TRUE, details =
+TRUE, Letters = letters) # contrast with Tukey adjustment by default.
+# Extracting the letters for the bars
+sig.diff.letters <- data.frame(Results_lsmeans$emmeans[,1],
+str_trim(Results_lsmeans$emmeans[,7]))
+colnames(sig.diff.letters) <- c(factor, "Letters")
+# for plotting with letters from significance test
+ave_stand2 <- lm_model$model %>%
+group_by(!!sym(factor)) %>%
+dplyr::summarize(
+ave.emerge = mean(.data[[dependent_var]], na.rm = TRUE),
+se = sd(.data[[dependent_var]]) / sqrt(n())
+) %>%
+left_join(sig.diff.letters, by = factor) %>%
+mutate(letter_position = ave.emerge + 10 * se)
+plot <- ggplot(data, aes(x = !! sym(factor), y = !! sym(dependent_var))) +
+stat_summary(fun = mean, geom = "bar") +
+stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.5) +
+ylab("Number of emerged plants") +
+geom_jitter(width = 0.02, alpha = 0.5) +
+geom_text(data = ave_stand2, aes(label = Letters, y = letter_position),
+size = 5) +
+xlab(as.character(factor)) +
+theme_classic()
+return(plot)
+}
+
+plot_cldbars_onefactor(model2, "Treatment")
+```
+
+
+Treatment 2 is showing statistically significant difference from rest of the treatments. Treatment 7 does not show statistically significant diffrence from 1,4,8 ,9 treatments but shows statistically significant difference from treatments 2,3,5, 6. 
+At treatment 2, the number of emerged plants are singnificantly lower than any other treatment. treatment 7 is showing intermediate number of emerged plants along with treatments 1,4,8 and 9 treatments. 
