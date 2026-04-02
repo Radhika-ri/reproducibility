@@ -53,6 +53,10 @@ library(dplyr)
     ## 
     ##     intersect, setdiff, setequal, union
 
+``` r
+#library(paletteer)
+```
+
 renv::snapshot - like save button it will ask to proceed?- yes to upload
 the new packages.
 
@@ -63,7 +67,9 @@ he needs to use restore function to get the packages.
 -renv::restore() -do u want to proceed?- yes it is gonna look into ur
 computerfirst. if the package does not exist, it will install them.
 
-limitations
+# Limitations
 
 1.  pandock , its itegrate with r markdown. its a outside package. so
     the person first needs to install pandock to use it.
+
+————-SECOND PART——————————————————–

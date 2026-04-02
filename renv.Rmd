@@ -3,10 +3,10 @@ title: "2_april_classnotes"
 author: "Radhika"
 date: "2026-04-02"
 output:
+  
+  html_document:
   md_document:
     variant: gfm 
-  html_document:
-  
 ---
 # Introduction
 
@@ -38,10 +38,9 @@ install.packages("MASS") any package.
 go to files, lock file has all the pacakges. 
 ```{r}
 
-
 library(ggplot2)
 library(dplyr)
-
+#library(paletteer)
 
 ```
 
@@ -56,12 +55,41 @@ he needs to use restore function to get the packages.
 
 -renv::restore()
 -do u want to proceed?- yes
- it is gonna look into ur computerfirst. if the package does not exist, it will install them. 
+ its' gonna look into ur computer first. if the package does not exist, it will install them. 
  
  
-limitations
+# Limitations
 
 1. pandock , its itegrate with r markdown. its a outside package. so the person first needs to install pandock to use it. 
+
+
+-------------SECOND PART------------------------------------------------------------------------
+
+
+```{r}
+
+mtcars
+#subsetting
+
+mtcars[1, 4]
+
+#finds all rows such that vs is 1
+mtcars[mtcars$vs==1, ]
+
+mtcars$hp[mtcars$vs==1 & mtcars$gear== 4]
+#using subset function
+subset(mtcars, vs==1 | gear==4)
+
+#cars with high hp
+
+max(mtcars$hp)
+
+```
+
+
+
+
+
 
 
 
