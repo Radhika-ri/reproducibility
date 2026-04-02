@@ -3,7 +3,6 @@ title: "2_april_classnotes"
 author: "Radhika"
 date: "2026-04-02"
 output:
-  
   html_document:
   md_document:
     variant: gfm 
@@ -66,7 +65,7 @@ he needs to use restore function to get the packages.
 -------------SECOND PART------------------------------------------------------------------------
 
 
-```{r}
+```{r subsetting}
 
 mtcars
 #subsetting
