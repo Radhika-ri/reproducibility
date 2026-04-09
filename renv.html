@@ -496,6 +496,68 @@ subset(mtcars, vs==1 | gear==4)</code></pre>
 
 max(mtcars$hp)</code></pre>
 <pre><code>## [1] 335</code></pre>
+<p>————–extra—</p>
+<p>#libraries to be loaded for mapping data library(tidyverse)
+library(usmap) library(maps) library(mapdata)</p>
+<p>#colorpalette cbbPalette &lt;- c(“black”, “#999”, “#e69500”,
+“#56b4e9”, “#009e73”, “#F0E442”,“#D55E00”) options(dplyr.print_max=
+1e9)</p>
+<div id="read-in-the-data-needed-which-is-the-output-of-the-preprocessing-script" class="section level4">
+<h4>Read in the data needed, which is the output of the preprocessing
+script</h4>
+<p>#we don’t have this data seedtreatment.prediction.nona &lt;-
+readRDS(“NCST_SeedTreatmentTrials_FinalData_2025-02-28.rds”)</p>
+<div id="map-of-sampling-figure-1." class="section level5">
+<h5>Map of sampling: Figure 1.</h5>
+</div>
+</div>
+</div>
+<div id="load-in-acrage-planted-map" class="section level1">
+<h1>Load in acrage planted map</h1>
+<p>counties &lt;- map_data(“county”) counties<span class="math inline">\(State&lt;- toupper (counties\)</span>region) #
+making all letters to uppercase counties<span class="math inline">\(County &lt;-
+toupper(counties\)</span>subregion)</p>
+<p>cotton.acres.harvested.county &lt;-
+read.csv(“1C1BDA3A-B866-36C2-B2AD-0FD203944B03.csv”) # we can get this
+online from the NASS</p>
+<p>str(cotton.acres.harvested.county) cotton.acres.harvested.bycounty
+&lt;- cotton.acres.harvested.county %&gt;% group_by(State, County)
+%&gt;% summarise(mean.acres.harvested= mean(Value))</p>
+<p>state.data &lt;- map_data(“state”) state.data<span class="math inline">\(State &lt;- toupper(state.data\)</span>region)</p>
+<p>state.data2 &lt;- state.data %&gt;% # SUBSETTING TO STATES THAT WE R
+INTERESTED IN subset(State %in% c(“ALABAMA”, “FLORIDA”, “TEXAS”,
+“ARKANSAS”, “MISSISSIPPI”, “SOUTH CAROLINA”, “NORTH CAROLINA”,
+“VIRGINIA”, “LOUISIANA”, “TENNESSEE”, “GEORGIA”, “OKLAHOMA”))</p>
+<p>cotton.acres.harvested.bycounty2 &lt;- left_join(counties,
+cotton.acres.harvested.bycounty, by = c(“State”, “County”))</p>
+<p>cotton.acres.harvested.bycounty.plot &lt;-
+cotton.acres.harvested.bycounty2 %&gt;% subset(State %in% c(“’ALABAMA”,
+“FLORIDA”, “TEXAS”, “ARKANSAS”, “MISSISSIPPI”, “SOUTH CAROLINA”, “NORTH
+CAROLINA”, “VIRGINIA”, “LOUISIANA”, “TENNESSEE”))</p>
+</div>
+<div id="convert-to-hectares" class="section level1">
+<h1>convert to hectares</h1>
+<p>cotton.acres.harvested.bycounty.plot<span class="math inline">\(Hectares &lt;-
+cotton.acres.harvested.bycounty.plot\)</span>mean.acres.harvested*0.404686
+map.points &lt;- seedtreatment.prediction.nona %&gt;% #manipulation of
+the data to find the unique areas group_by(Long, Lat) %&gt;% tally</p>
+</div>
+<div id="figure-1" class="section level1">
+<h1>Figure 1</h1>
+<p>Fig1 &lt;- ggplot()
+geom_polygon(data=cotton.acres.harvested.bycounty.plot, mapping=
+aes(x=long, y=lat, group=group, fill = Hectares), color = “grey”,
+size=0.05) + geom_polygon (data = state.data2, mapping = aes(x=long, y =
+lat, group = group, color =“black”, fill = NA)) +
+scale_fill_gradient(high=“#4F7942”, low= “#ECFFDC”, na.value = “white”,
+name= “Ave.Hectares Upland Cotton Harvested 1993-2023”) + geom_point
+(data = map.points, aes (x= Long, y = Lat, size = n), fill =
+cbbPalette[[8]], color = “black”, alpha = 0.6, shape = 21) + scale_size
+(name= “Years in In National Cotton Seedtreatment Trials”) +
+theme_minimal()+ theme (legend.position=“right”) + coord_map(“albers”,
+lat0 = 45.5, lat1= 29.5) + xLab(“Longitude”)+ ylab(“Latitude”)</p>
+<p>Fig1</p>
+<p>```</p>
 </div>
 
 
